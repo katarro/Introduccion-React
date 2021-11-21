@@ -3,4 +3,18 @@
   text-align: center;
   margin: 0;
   padding: 48px;
+  font-weight: bold;
+}
+
+.TodoCounter-h1 {
+  text-align: center;
+  margin-bottom: -7px;
+  background: -webkit-linear-gradient(
+    90deg,
+    rgb(223, 251, 63) 0%,
+    rgb(38, 136, 38) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 60px;
 }
