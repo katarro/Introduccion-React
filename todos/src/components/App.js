@@ -16,6 +16,20 @@ const defaulTodos = [
 ];
 
 function App() {
+  const localStorageTodos = localStorage.getItem("TODOS_V1");
+  /*
+  1.- Cuando no hay informacion en localStorage
+  2.- Si ya hay información, traerla del localStorage
+  */
+  let parsedTodos;
+  // 1.-
+  if (!localStorageTodos) {
+    localStorage.setItem("TODOS_V1", []);
+    parsedTodos = []
+  } else {
+    parsedTodos = JSON.parse(localStorageTodos);
+  }
+
   const [todos, setTodos] = React.useState(defaulTodos);
   const [searchValue, setSearchValue] = React.useState("");
 
@@ -39,6 +53,32 @@ function App() {
     });
   }
 
+  // Marcado como COMPLETADO
+  const completeTodos = (text) => {
+    // 1.- Encontramos la posicion del To Do
+    // 2.- Cambiamos su estado de false a true
+    // 3.- Agregamos el To Do actualizado al array de To DOs
+
+    // 1
+    const index = todos.findIndex((item) => item.text === text);
+    // 2.-
+    const newTodos = [...todos];
+
+    // Codigo para cambiar entre uno y otro
+    newTodos[index].completed === false
+      ? (newTodos[index].completed = true)
+      : (newTodos[index].completed = false);
+
+    // newTodos[index].completed = true;
+    // 3.-
+    setTodos(newTodos);
+  };
+
+  const deletTodo = (text) => {
+    const deleted = todos.filter((item) => item.text !== text);
+    setTodos(deleted);
+  };
+
   return (
     <div className="App">
       <div className="left">
@@ -49,10 +89,7 @@ function App() {
 
       <div className="right">
         <TodoCounter completed={length} total={total} />
-        <TodoSearch 
-          search={searchValue}
-          setSearch={setSearchValue}
-        />
+        <TodoSearch search={searchValue} setSearch={setSearchValue} />
         <TodoList>
           {/* Este mapa se está mandando como CHILDREN a TodoList */}
           {searchedTodos.map((item) => (
@@ -60,6 +97,9 @@ function App() {
               key={item.text}
               text={item.text}
               completed={item.completed}
+              // Le pasamos la funcion al Componente hijo, y este ejecuta la función, cada vez que hace un click
+              onComplete={() => completeTodos(item.text)}
+              onDelete={() => deletTodo(item.text)}
             />
           ))}
         </TodoList>
