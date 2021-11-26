@@ -1,0 +1,13 @@
+ul {
+  margin-top: 30px;
+  padding: 0 10px 56px 0;
+  list-style: none;
+  height: 300px;
+  overflow-y: scroll;
+}
+.TodoList::-webkit-scrollbar{
+  background-color: #2ECCFA;
+  border-radius: 5px;
+  width: 10px;
+}
+
