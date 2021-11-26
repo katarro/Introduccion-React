@@ -40,5 +40,5 @@
   "devDependencies": {
     "gh-pages": "^3.2.3"
   },
-  "homepages": "https://katarro.github.io/Introduccion-React"
+  "homepage": "https://katarro.github.io/Introduccion-React"
 }
